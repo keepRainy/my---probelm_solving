@@ -155,10 +155,12 @@ bool move(Snake &snake)
 
     // 새로운 뱀머리의 좌표에 사과가 있으면
     if (board[nhy][nhx] == APPLE) {
+        // 뱀머리 늘려줌
         board[nhy][nhx] = BODY;
         snake.body.push_front({nhy, nhx});
     // 새로운 뱀머리의 좌표에 사과가 없으면
     } else {
+        // 뱀머리 늘려줌
         board[nhy][nhx] = BODY;
         snake.body.push_front({nhy, nhx});
         // 꼬리를 줄여줌
