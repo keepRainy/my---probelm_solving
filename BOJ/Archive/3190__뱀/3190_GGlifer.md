@@ -202,6 +202,6 @@ void updateDir(Snake &snake, queue<Info> &infos, int time)
 
 ## \# GitHub / No Comment
 
-- [C++](https://github.com/GGlifer/Problem_solving/blob/master/BOJ/Archive/3190__%E1%84%87%E1%85%A2%E1%86%B7/3190_GGlifer.cpp)
+- [C++](https://github.com/GGlifer/Problem_solving/blob/master/BOJ/Archive/3190__%EB%B1%80/3190_GGlifer.cpp)
 - Java / Not Yet
 - Python 3 / Not Yet
