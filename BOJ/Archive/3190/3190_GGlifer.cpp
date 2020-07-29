@@ -26,7 +26,7 @@ struct Point { int y, x; };
 struct Snake { int dir; deque<Point> body; };
 
 // Set up : Functions Declaration
-bool isValid(int y, int x);
+bool isValid(int ny, int nx);
 bool move(Snake &snake);
 void updateDir(Snake &snake, queue<Info> &infos, int time);
 
@@ -69,9 +69,9 @@ int main()
 }
 
 // Helper Functions
-bool isValid(int y, int x)
+bool isValid(int ny, int nx)
 {
-    return y >= 0 && y < N && x >= 0 && x < N;
+    return ny >= 0 && ny < N && nx >= 0 && nx < N;
 }
 
 bool move(Snake &snake)
@@ -86,16 +86,13 @@ bool move(Snake &snake)
     if (not(isValid(nhy, nhx)) || board[nhy][nhx] == BODY) {
         return false;
     }
-
-    if (board[nhy][nhx] == APPLE) {
-        board[nhy][nhx] = BODY;
-        snake.body.push_front({nhy, nhx});
-    } else {
-        board[nhy][nhx] = BODY;
-        snake.body.push_front({nhy, nhx});
+    
+    if (board[nhy][nhx] != APPLE) {
         board[tail.y][tail.x] = EMPTY;
         snake.body.pop_back();
     }
+    board[nhy][nhx] = BODY;
+    snake.body.push_front({nhy, nhx});
 
     return true;
 }
