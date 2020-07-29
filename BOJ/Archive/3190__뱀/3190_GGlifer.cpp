@@ -112,7 +112,7 @@ void updateDir(Snake &snake, queue<Info> &infos, int time)
                 case EAST:  snake.dir = NORTH; return;
                 case WEST:  snake.dir = SOUTH; return;
                 case NORTH: snake.dir = WEST;  return;
-                default: exit(999);
+                default: throw;
             }
         }
         if (info.C == 'D') {
@@ -121,7 +121,7 @@ void updateDir(Snake &snake, queue<Info> &infos, int time)
                 case EAST:  snake.dir = SOUTH; return;
                 case WEST:  snake.dir = NORTH; return;
                 case NORTH: snake.dir = EAST;  return;
-                default: exit(999);
+                default: throw;
             }
         }
     }
