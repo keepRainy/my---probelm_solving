@@ -37,22 +37,6 @@
 - 방향 변환 정보를 Queue 에 넣어서 시간이 될 때마다 꺼내 쓰는 방식으로 구현하였다.
   때문에, 꺼내 쓸 때마다 Queue 가 비었는지 확인해야 한다
 
-- move 함수에서 
-    ```C++
-    board[nhy][nhx] = BODY;
-    snake.body.push_front({nhy, nhx});
-    ```
-  가 중복된다. 하지만 그렇다고 해서
-    ```C++
-    board[nhy][nhx] = BODY;
-    snake.body.push_front({nhy, nhx});
-    if (board[nhy][nhx] != APPLE) {
-        board[tail.y][tail.x] = EMPTY;
-        snake.body.pop_back();
-    }
-    ```
-  으로 바꾸면 안 된다. 이미 갱신된 정보를 기준으로 ```if``` 문이 실행되기 때문이다.
-
 ---
 
 ## \# Code - C++ / Comment
@@ -153,20 +137,15 @@ bool move(Snake &snake)
         return false;
     }
 
-    // 새로운 뱀머리의 좌표에 사과가 있으면
-    if (board[nhy][nhx] == APPLE) {
-        // 뱀머리 늘려줌
-        board[nhy][nhx] = BODY;
-        snake.body.push_front({nhy, nhx});
     // 새로운 뱀머리의 좌표에 사과가 없으면
-    } else {
-        // 뱀머리 늘려줌
-        board[nhy][nhx] = BODY;
-        snake.body.push_front({nhy, nhx});
+    if (board[nhy][nhx] != APPLE) {
         // 꼬리를 줄여줌
         board[tail.y][tail.x] = EMPTY;
         snake.body.pop_back();
     }
+    // 뱀머리 늘려줌
+    board[nhy][nhx] = BODY;
+    snake.body.push_front({nhy, nhx});
 
     return true;
 }
