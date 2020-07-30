@@ -18,7 +18,7 @@
 
 ## \# Point
 
-- 문제는 좌표가 (1,1)부터 시작하지만 편의상 (0,0)부터 시작하는 것으로 가정하고 풀었다
+- 문제는 좌표가 __(1,1)__ 부터 시작하지만 편의상 __(0,0)__ 부터 시작하는 것으로 가정하고 풀었다
 
 - 게임은 뱀이 보드 밖으로 나가거나 자신의 몸에 부딪히면 끝난다 
   이때, __10초__까지 뱀이 움직이는 데 성공했고 __11초__에 뱀이 보드 밖으로 나가거나 자신의 몸에 부딪혔다면,
@@ -32,10 +32,32 @@
 
 ---
 
+#### \# Complexity - Time
+
+- 뱀의 최대 생존시간은 max(X) + max(N) = 10100 정도이다
+
+- 뱀의 모습과 움직임을 시뮬레이션 하는데 필요한 연산은 모두 O(1) 이다
+
+- 시간 제한이 1초면 완 널널할 것 같다
+
+#### \# Complexity - Memory
+
+- 기본 = 1980KB (백준 1000번 문제 A+B 를 통과한 코드에서 사용한 메모리 양)
+
+- ```int board[100][100]``` = 100 * 100 * 4B = 40KB
+
+- ```deque<Point>``` = 100 * 100 * (4B + 4B) = 80KB
+
+- 메모리 제한이 128MB면 완전 널널할 것 같다
+
+---
+
 ## \# Warning
 
 - 방향 변환 정보를 Queue 에 넣어서 시간이 될 때마다 꺼내 쓰는 방식으로 구현하였다
   때문에, 꺼내 쓸 때마다 Queue 가 비었는지 확인해야 한다
+
+- (티스토리 행간 에러로 넣어줘야 되네 띠발!)
 
 ---
 
@@ -129,8 +151,8 @@ bool move(Snake &snake)
     Point head = snake.body.front(); // Deque 의 맨 앞 좌표는 뱀의 머리를 가리킴
     Point tail = snake.body.back();  // Deque 의 맨 뒤 좌표는 뱀의 꼬리를 가리킴
 
-    int nhy = head.y + dy[dir]; /* new head y */
-    int nhx = head.x + dx[dir]; /* new head x */
+    int nhy = head.y + dy[dir]; // new head y
+    int nhx = head.x + dx[dir]; // new head x
 
     // 새로운 뱀머리의 좌표가 유효하지 않은 좌표이거나 자기 몸통이면 움직이는데 실패
     if (not(isValid(nhy, nhx)) || board[nhy][nhx] == BODY) {
@@ -143,7 +165,7 @@ bool move(Snake &snake)
         board[tail.y][tail.x] = EMPTY;
         snake.body.pop_back();
     }
-    // 뱀머리 늘려줌
+    // 새로운 뱀머리의 좌표에 사과가 있든 없든 뱀머리는 늘려줌
     board[nhy][nhx] = BODY;
     snake.body.push_front({nhy, nhx});
 
@@ -157,6 +179,7 @@ void updateDir(Snake &snake, queue<Info> &infos, int time)
     Info info = infos.front();
     if (info.X == time) {
         infos.pop();
+        // 사실 아래부분을 2차원 전역 배열로 미리 선언해놓고 쓰면 더 좋다
         if (info.C == 'L') {
             switch (snake.dir) {
                 case SOUTH: snake.dir = EAST;  return;
@@ -186,3 +209,5 @@ void updateDir(Snake &snake, queue<Info> &infos, int time)
 - [C++](https://github.com/GGlifer/Problem_solving/blob/master/BOJ/Archive/3190__%EB%B1%80/3190_GGlifer.cpp)
 - Java / Not Yet
 - Python 3 / Not Yet
+
+> 지적, 조언, 첨언 모두 환영합니다!
