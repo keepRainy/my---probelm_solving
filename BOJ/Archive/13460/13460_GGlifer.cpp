@@ -20,7 +20,7 @@ char board[10][10];
 int dy[4] = {+1, 0, 0, -1};
 int dx[4] = {0, +1, -1, 0};
 struct Point { int y, x; };
-struct Status { Point R, B; };
+struct Status { int pd; Point R, B; };
 Point O;
 #define SUCCESS  1
 #define CONTINUE 0
@@ -28,7 +28,7 @@ Point O;
 
 // Set up : Functions Declaration
 bool operator == (const Point &u, const Point &v);
-pair<int,Status> move(Status C, int dir);
+pair<int,Status> tilt(Status C, int dir);
 
 
 int main()
@@ -38,7 +38,7 @@ int main()
     cin.tie(nullptr);
 
     // Set up : Input
-    Point SR{}, SB{}; // start R, start B
+    Point SR{}, SB{};
     cin >> N >> M;
     for (int i=0; i<N; i++) {
         string line; cin >> line;
@@ -60,8 +60,8 @@ int main()
     }
 
     // Process
-    queue<pair<int,Status>> que;
-    que.push({-1,{SR, SB}});
+    queue<Status> que;
+    que.push({-1, SR, SB});
 
     int cnt = 0;
     while (not(que.empty())) {
@@ -69,23 +69,23 @@ int main()
         cnt++;
         if (cnt > 10) break;
         while (size--) {
-            Status C = que.front().second;
-            int pd = que.front().first;
+            Status C = que.front();
+            int pd = C.pd;
             que.pop();
 
             for (int i=0; i<4; i++) {
                 if (pd == i || 3-pd == i) continue;
                 int code; Status A{};
-                tie(code, A) = move(C, i);
+                tie(code, A) = tilt(C, i);
 
                 // Control : Output
                 if (code == SUCCESS) {
                     cout << cnt << endl;
                     exit(0);
                 }
-
+                
                 else if (code == CONTINUE) {
-                    que.push({i, A});
+                    que.push(A);
                 }
             }
         }
@@ -101,7 +101,7 @@ bool operator == (const Point &u, const Point &v)
     return make_tuple(u.x, u.y) == make_tuple(v.x, v.y);
 }
 
-pair<int,Status> move(Status C, int dir)
+pair<int,Status> tilt(Status C, int dir)
 {
     Point CR = C.R;
     Point CB = C.B;
@@ -141,10 +141,10 @@ pair<int,Status> move(Status C, int dir)
     } while (isRMoved || isBMoved);
 
     if (isBFallen) {
-        return {FAIL, {CR, CB}};
+        return {FAIL, {dir, CR, CB}};
     } else if (isRFallen) {
-        return {SUCCESS, {CR, CB}};
+        return {SUCCESS, {dir, CR, CB}};
     } else {
-        return {CONTINUE, {CR, CB}};
+        return {CONTINUE, {dir, CR, CB}};
     }
 }
