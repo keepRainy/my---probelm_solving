@@ -73,6 +73,8 @@ int main()
         if (cy == ed.y && cx == ed.x) {
             ans = min(ans, cnt);
             continue;
+            // ans = cnt;
+            // break;
         }
 
         int ny = cy + dy[cd];
