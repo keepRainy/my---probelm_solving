@@ -48,6 +48,7 @@ int main()
 
     // Process
     queue<Light> que;
+    // deque<Light> deq;
     bool isVisited[N][N][4];
     memset(isVisited, false, sizeof(isVisited));
     int isCount[N][N][4];
@@ -82,6 +83,7 @@ int main()
                     isVisited[ny][nx][cd] = true;
                     isCount[ny][nx][cd] = cnt;
                     que.push({{ny, nx}, cd});
+                    // deq.push_front({{ny, nx}, cd});
                 }
             }
         }
@@ -97,6 +99,7 @@ int main()
                             isVisited[ny][nx][i] = true;
                             isCount[ny][nx][i] = cnt+1;
                             que.push({{ny, nx}, i});
+                            // deq.push_back({{ny, nx}, i});
                         }
                     }
                 }
