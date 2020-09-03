@@ -55,20 +55,22 @@ bool isPossible(const string &S, string T)
     if (S == T)
         return true;
 
-    char f = T.front();
-    char b = T.back();
+    if (T.length() >= 2) {
+        char f = T.front();
+        char b = T.back();
 
-    if (f == 'A' && b == 'A')
-        return isPossible(S, pop(T));
+        if (f == 'A' && b == 'A')
+            return isPossible(S, pop(T));
 
-    if (f == 'A' && b == 'B')
-        return false;
+        if (f == 'A' && b == 'B')
+            return false;
 
-    if (f == 'B' && b == 'A') /* B-->A 꼴이면 */
-        return isPossible(S, pop(T)) || isPossible(S, pop(turn(T)));
+        if (f == 'B' && b == 'A') /* B-->A 꼴이면 */
+            return isPossible(S, pop(T)) || isPossible(S, pop(turn(T)));
 
-    if (f == 'B' && b == 'B')
-        return isPossible(S, pop(turn(T)));
+        if (f == 'B' && b == 'B')
+            return isPossible(S, pop(turn(T)));
+    }
 
     return false;
 }
