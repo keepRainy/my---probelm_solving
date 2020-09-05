@@ -15,7 +15,6 @@ using namespace std;
 
 // Set up : Global Variables
 deque<char> W[4];
-bool isVisited[4];
 
 // Set up : Functions Declaration
 void rotate(int no, int dir);
