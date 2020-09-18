@@ -59,7 +59,7 @@ int main()
     }
 
     // Control : Output
-    cout << dp[N][N][R]+dp[N][N][C]+dp[N][N][D] << endl;
+    cout << dp[N][N][R] + dp[N][N][C] + dp[N][N][D] << endl;
 }
 
 // Helper Functions
