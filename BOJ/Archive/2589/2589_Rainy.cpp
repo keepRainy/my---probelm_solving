@@ -17,7 +17,6 @@ using namespace std;
 // Set up : Global Variables
 int N, M;
 char cato[50][50];
-#define INF 987654321
 int dy[4] = {+1, 0, 0, -1};
 int dx[4] = {0, +1, -1, 0};
 struct Point { int y, x; };
