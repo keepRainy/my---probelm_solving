@@ -2,7 +2,7 @@
 //  BOJ
 //  ver.C++
 //
-//  Created by Rainy
+//  Created by GGlifer
 //
 //  Open Source
 
