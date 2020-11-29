@@ -34,7 +34,7 @@ int main()
     string NO = "NO";
     string INIT = "INIT";
     map<string,vector<string>> next;
-    next["START"] = {"0", "1"};
+    next["INIT"] = {"0", "1"};
     next["1"] = {"10", NO};
     next["10"] = {"100", NO};
     next["100"] = {"100~", "100~1"};
