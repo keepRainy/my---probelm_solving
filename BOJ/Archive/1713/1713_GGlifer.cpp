@@ -38,7 +38,7 @@ int main()
     vector<Frame> F;
     for (int i=0; i<M; i++) {
         int no = R[i];
-        auto p = find_if(F.begin(), F.end(),[no](Frame f) {
+        auto p = find_if(F.begin(), F.end(), [no](Frame f) {
             return f.no == no;
         });
         if (p != F.end()) {
